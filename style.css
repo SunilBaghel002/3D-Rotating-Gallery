@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(17, 10, 10);
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 300px;
+    height: 450px;
+    transform-style: preserve-3d;
+    transform: perspective(5000px);
+    animation: rotate10 150s linear infinite;
+}
+
+.container span {
+    position: absolute;
+    /* z-index: 2; */
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--i)*45deg)) translateZ(500px);
+    transition: transform 1s;
+    animation: start 7s linear 1 ;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.container img {
+    width: 300px;
+    height: 450px;
+    position: relative;
+    z-index: 2;
+    /* object-fit: contain; */
+    border-radius: 10px;
+    box-shadow: 0 15px 25px rgba(255, 255, 255, 0.26);
+    animation: sink 5s alternate infinite;
+}
+.back{
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: rgb(240, 235, 235);
+}
+
+@keyframes rotate10 {
+    from {
+        transform: perspective(20000px) rotateY(80deg);
+    }
+
+    to {
+        transform: perspective(20000px) rotateY(2000deg);
+    }
+}
+@keyframes sink{
+    from{
+        transform: scale(0.8);
+    }
+    to{
+        transform: scale(1.1);
+    }
+}
+@keyframes start{
+    from{
+        transform: rotateY(calc(var(--i)*30deg)) translateZ(00px);
+    }
+    to{
+        transform: rotateY(calc(var(--i)*45deg)) translateZ(500px);
+    }
+}
+@media (max-width: 600px){
+    .container{
+        transform: perspective(2000px);
+        
+    }
+    .container img{
+        width: 100px;
+        height: 150px;
+        animation: down 20s alternate infinite ease-in;
+    }
+    .container span{
+        transform: rotateY(calc(var(--i)*45deg)) translateZ(200px);
+        animation: none;
+    }
+    @keyframes down {
+        from{
+            
+        }
+        to{
+            transform: translateY(500px);
+        }
+    }
+
+}
